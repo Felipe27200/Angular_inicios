@@ -1,0 +1,31 @@
+<!-- 
+    >>> De esta forma sólo se mostrará que es un Object <<<
+    <h2>{{ hero }}</h2> 
+-->
+
+<!-- Presentación adecuada de los datos del heroe -->
+
+<!-- 
+    <div>id: <span>{{ hero.id }}</span></div>
+    <div>name: <span>{{ hero.name }}</span></div> 
+-->
+
+<!-- Mostrar y Editar la información del Héroe -->
+<!-- Dar formato al string -->
+<h2>{{ hero.name | uppercase }} Details </h2>
+
+<div>
+    <label for="name">Hero name: </label>
+    <!-- 
+        [(ngModel)]: es una sintaxis de angular que vincula
+        en dos flujos los datos.
+    
+        Los datos pueden viajar de hero.name al textbox y del 
+        textbox de nuevo a hero.name.
+
+        Aunque es una directiva válida angular llamarla directamente
+        sobre el textbox generará un error, ya que pertenece al 
+        módulo opcional de FormsModule y debe optar por usarloj.
+    -->
+    <input id="name" [(ngModel)]="hero.name" placeholder="name">
+</div>

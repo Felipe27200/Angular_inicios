@@ -5,6 +5,12 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+// Clase del componente
 export class AppComponent {
-  title = 'angular-tour-of-heroes';
+  /**
+   * VI del componentente, son accesibles mediante
+   *  {{  }}
+   */
+  title = 'Tour of Heroes';
 }
