@@ -5,12 +5,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
 // Se importa el módulo de formularios de angular.
 import { FormsModule } from '@angular/forms';
 
+import { AppComponent } from './app.component';
+import { HeroesComponent } from './heroes/heroes.component';
+
+
 @NgModule({
+  /**
+   * Son los componentes que se usarán en la aplicación
+   */
   declarations: [
     AppComponent,
     HeroesComponent
