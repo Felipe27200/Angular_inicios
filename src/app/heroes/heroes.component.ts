@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Importar la interfaz
-// import { Hero } from '../hero';
+import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
 
 @Component({
@@ -33,12 +33,24 @@ export class HeroesComponent implements OnInit {
    * definir la forma del heroe
    * hero = "Windstorm";
    */
-  // hero: Hero = {
-  //   id: 1,
-  //   name: "Windstorm"
-  // };
+  hero: Hero = {
+    id: 1,
+    name: "Windstorm"
+  };
 
-  constructor() { }
+  // Aquí se crea la VI indicando que puede ser 
+  // undefined, gracias al "?"
+  selectedHero?: Hero;
+
+  constructor() { 
+
+  }
+
+  // método de la clase: parámetro Hero y retorno void
+  onSelect(hero: Hero): void
+  {
+    this.selectedHero = hero;
+  }
 
   /**
    * Este método permite inicializar y traer datos

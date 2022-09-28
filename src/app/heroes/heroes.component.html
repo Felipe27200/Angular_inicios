@@ -41,9 +41,36 @@
 
 <ul class="heroes">
     <li *ngFor="let hero of heroes"> <!-- Este sería el elemento anfitrión u host -->
-        <button type="button">
+
+        <!-- Listen events: los paréntesis le indican a angular que escuche el evento -->
+        <!-- 
+            [class.selected]="expresion" cuando la expresión resulta true se aplica el estilo
+            cuando la expresión es false este se remueve.
+
+            Se aplica la clase "selected" de estilos.
+        -->
+        <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
             <span class="badge">{{ hero.id }}</span> 
             <span class="name">{{ hero.name }}</span>
         </button>
     </li>
 </ul>
+
+<!-- 
+    SECCIÓN PARA MOSTRAR LA INFO. DE UN
+        HÉROE QUE HA SIDO SELECCIONADO
+
+    *ngIf le indica a angular que muestra esta
+    sección sólo cuando el héroe ha sido seleccionado.
+-->
+
+<div *ngIf="selectedHero">
+    <h2>{{ selectedHero.name | uppercase }} Details</h2>
+
+    <div>id: {{ selectedHero.id }}</div>
+
+    <div>
+        <label for="hero-name">Hero name: </label>
+        <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+    </div>
+</div>
