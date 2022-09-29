@@ -1,0 +1,24 @@
+<!-- 
+    SECCIÓN PARA MOSTRAR LA INFO. DE UN
+        HÉROE QUE HA SIDO SELECCIONADO
+
+    *ngIf le indica a angular que muestra esta
+    sección sólo cuando el héroe ha sido seleccionado.
+-->
+
+<div *ngIf="hero">
+    <h2>{{ hero.name | uppercase }} Details</h2>
+
+    <div>id: {{ hero.id }}</div>
+
+    <div>
+        <label for="hero-name">Hero name: </label>
+        <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+    </div>
+</div>
+
+<!-- 
+    Existe una relación de padre - hijo
+    entre este componente y heroes, siendo heroes el padre
+    ya que éste controla al hijo enviandole datos. 
+-->

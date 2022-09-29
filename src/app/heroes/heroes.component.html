@@ -56,21 +56,14 @@
     </li>
 </ul>
 
+<!-- La propiedad hero de hero-detail debe ser una Input propiedad,
+    ya que el componente heroes lo vincula de esta forma. -->
+
+<!-- [hero]="selectedHero", es una propiedad de vinculación de angular -->
+
 <!-- 
-    SECCIÓN PARA MOSTRAR LA INFO. DE UN
-        HÉROE QUE HA SIDO SELECCIONADO
-
-    *ngIf le indica a angular que muestra esta
-    sección sólo cuando el héroe ha sido seleccionado.
--->
-
-<div *ngIf="selectedHero">
-    <h2>{{ selectedHero.name | uppercase }} Details</h2>
-
-    <div>id: {{ selectedHero.id }}</div>
-
-    <div>
-        <label for="hero-name">Hero name: </label>
-        <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
-    </div>
-</div>
+    Es una propiedad de un flujo unidireccional, ya que va desde la propiedad
+    selectedHero del componente HeroesComponent hasta la propiedad hero de
+    HeroDetailComponent
+ -->
+<app-hero-detail [hero]="selectedHero" ></app-hero-detail>
