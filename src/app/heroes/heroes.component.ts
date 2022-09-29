@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 // Importar la interfaz
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
+// import { HEROES } from '../mock-heroes'; -> Ya no será necesaria gracias a los servicios
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -26,7 +27,8 @@ export class HeroesComponent implements OnInit {
    * Se le asigna la variable correspondiente,
    * que almacena los datos del módulo importado.
    */
-  heroes = HEROES;
+  // heroes = HEROES;
+  heroes: Hero[] = [];
 
   /**
    * Se refactorizará para usar la interfaz y así
@@ -42,7 +44,10 @@ export class HeroesComponent implements OnInit {
   // undefined, gracias al "?"
   selectedHero?: Hero;
 
-  constructor() { 
+  // Se añade el servicio al constructor, para que 
+  // este sea buscado e integrado, el parámetro es una 
+  // instancia del servicio.
+  constructor(private heroService: HeroService) { 
 
   }
 
@@ -56,7 +61,24 @@ export class HeroesComponent implements OnInit {
    * Este método permite inicializar y traer datos
    * al componente apenas sea renderizado por 
    * primera vez.
+   * 
+   * Realiza la invocación del método getHeroes()
+   * apenas el componente haya sido contruido adecuadamente.
    */
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.getHeroes();
+  }
+
+  getHeroes(): void 
+  {
+    /**
+     * Aquí se asigna a la propiedad heroes un array 
+     * con heroes predefinidos, los cuales son traidos
+     * mediante la variable de instancia heroService,
+     * que almacena una instancia del servicio y permite
+     * acceder a sus atributos y propiedades.
+     */
+    this.heroes = this.heroService.getHeroes();
   }
 }
