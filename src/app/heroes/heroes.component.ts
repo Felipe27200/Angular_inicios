@@ -5,6 +5,9 @@ import { Hero } from '../hero';
 // import { HEROES } from '../mock-heroes'; -> Ya no será necesaria gracias a los servicios
 import { HeroService } from '../hero.service';
 
+// Importa el servicio de mensajes
+import { MessageService } from '../message.service';
+
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -47,13 +50,18 @@ export class HeroesComponent implements OnInit {
   // Se añade el servicio al constructor, para que 
   // este sea buscado e integrado, el parámetro es una 
   // instancia del servicio.
-  constructor(private heroService: HeroService) { 
+  constructor(private heroService: HeroService, private messageService: MessageService) { 
 
   }
 
   // método de la clase: parámetro Hero y retorno void
   onSelect(hero: Hero): void
   {
+    /**
+     * Se muestra el id del heroe seleccionado en un mensaje.
+     */
+    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
+
     this.selectedHero = hero;
   }
 
@@ -70,15 +78,39 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
+  // getHeroes(): void 
+  // {
+  //   /**
+  //    * Aquí se asigna a la propiedad heroes un array 
+  //    * con heroes predefinidos, los cuales son traidos
+  //    * mediante la variable de instancia heroService,
+  //    * que almacena una instancia del servicio y permite
+  //    * acceder a sus atributos y propiedades.
+  //    */
+  //   this.heroes = this.heroService.getHeroes();
+  // }
+
+  /**
+   * Como el método getHeroes() en hero.service retorna ahora
+   * un Observable<Hero[]> se necesita ajustar el método
+   * getHeroes() de este componente para que pueda trabajar con
+   * este cambio.
+   * 
+   */
   getHeroes(): void 
   {
     /**
-     * Aquí se asigna a la propiedad heroes un array 
-     * con heroes predefinidos, los cuales son traidos
-     * mediante la variable de instancia heroService,
-     * que almacena una instancia del servicio y permite
-     * acceder a sus atributos y propiedades.
+     * Ahora el método espera que el Observable emita el array de heroes.
+     * 
+     * Se accede a la propiedad de la clase que almacena la instancia
+     * del servicio heroService, así se accede a su método getHeroes(),
+     * para luego invocar al método subscribe.
+     * 
+     * subscribe() pasa el array emitido al callback, que lo establece
+     * en la propiedad "heroes" de este componente.
      */
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
   }
+
 }
