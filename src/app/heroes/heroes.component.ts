@@ -38,32 +38,33 @@ export class HeroesComponent implements OnInit {
    * definir la forma del heroe
    * hero = "Windstorm";
    */
-  hero: Hero = {
-    id: 1,
-    name: "Windstorm"
-  };
+  // hero: Hero = {
+  //   id: 1,
+  //   name: "Windstorm"
+  // };
 
   // Aquí se crea la VI indicando que puede ser 
   // undefined, gracias al "?"
-  selectedHero?: Hero;
+  // selectedHero?: Hero;
 
   // Se añade el servicio al constructor, para que 
   // este sea buscado e integrado, el parámetro es una 
   // instancia del servicio.
-  constructor(private heroService: HeroService, private messageService: MessageService) { 
+  constructor(private heroService: HeroService, private messageService: MessageService) 
+  { 
 
   }
 
   // método de la clase: parámetro Hero y retorno void
-  onSelect(hero: Hero): void
-  {
-    /**
-     * Se muestra el id del heroe seleccionado en un mensaje.
-     */
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
+  // onSelect(hero: Hero): void
+  // {
+  //   /**
+  //    * Se muestra el id del heroe seleccionado en un mensaje.
+  //    */
+  //   this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
 
-    this.selectedHero = hero;
-  }
+  //   this.selectedHero = hero;
+  // }
 
   /**
    * Este método permite inicializar y traer datos

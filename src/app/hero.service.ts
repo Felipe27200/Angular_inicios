@@ -43,7 +43,7 @@ export class HeroService {
   getHeroes(): Observable<Hero[]>
   {
     /**
-     * Retorna un Observable<Hero[]>, que emite un
+     * of() Retorna un Observable<Hero[]>, que emite un
      * único valor, el array del mock heroes.
      */
     const heroes = of(HEROES);
@@ -54,5 +54,14 @@ export class HeroService {
     this.messageService.add("Hero Service: fetched heroes");
 
     return heroes;
+  }
+
+  getHero(id: number): Observable<Hero>
+  {
+    const hero = HEROES.find(h => h.id === id)!;
+
+    this.messageService.add(`HeroService: fetched hero id = ${id}`);
+
+    return of(hero);
   }
 }

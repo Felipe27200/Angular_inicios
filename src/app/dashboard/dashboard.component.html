@@ -1,0 +1,11 @@
+<h2>Top Heroes</h2>
+
+<div class="heroes-menu">
+    <!-- Con la interpolación en el routerLink
+        es posible enviarle datos a la *url* -->
+    <a *ngFor="let hero of heroes"
+        routerLink="/detail/{{ hero.id }}">
+        {{ hero.name }}
+    </a>
+</div>
+
