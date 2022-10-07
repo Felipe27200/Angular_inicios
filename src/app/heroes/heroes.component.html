@@ -39,6 +39,26 @@
 
 <h2>My Heroes</h2>
 
+<!-- 
+    Añadir un heroe, cuando ocurra el evento se invoca el 
+    método add() y se le envía el valor del input, 
+    luego limpia el input para insertar otro nombre.
+-->
+<div>
+    <label for="new-hero">Hero name: </label>
+
+    <input id="new-hero" #heroName />
+
+    <!-- <button type="button" class="add-button" 
+      (click)="add(heroName.value); heroName.value=''">
+        Add Hero 
+    </button> -->
+
+    <button type="button" class="add-button" (click)="add(heroName.value); heroName.value=''">
+        Add hero
+      </button>
+</div>
+
 <ul class="heroes">
     <li *ngFor="let hero of heroes"> <!-- Este sería el elemento anfitrión u host -->
 
@@ -62,6 +82,9 @@
             <span class="badge">{{ hero.id }}</span>
             {{ hero.name }}
         </a>
+
+        <button type="button" class="delete" title="delete hero"
+            (click)="delete(hero)">x</button>
     </li>
 </ul>
 

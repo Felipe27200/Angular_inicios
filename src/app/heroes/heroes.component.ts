@@ -114,4 +114,29 @@ export class HeroesComponent implements OnInit {
         .subscribe(heroes => this.heroes = heroes);
   }
 
+  add (name: string): void
+  {
+    name = name.trim();
+
+    if (!name) {return;};
+
+    /**
+     * El handler crea un objeto basado en el nombre del heroe,
+     * luego el handler envía el objeto al método del servicio
+     * addHero().
+     * 
+     * Cuando este método crea un nuevo objeto, el callback subscribe 
+     * recibe el nuevo heroe y lo pone dentro de la lista heroes para mostrarlo.
+     */
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero); 
+      });
+  }
+
+  delete (hero: Hero): void
+  {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero.id).subscribe();
+  }
 }

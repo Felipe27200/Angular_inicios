@@ -5,6 +5,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+// Importar HttpClient para realizar peticiones de esta naturaleza
+import { HttpClientModule } from '@angular/common/http';
+
+// Dependencias de la API in-memory
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 // Se importa el módulo de formularios de angular.
 import { FormsModule } from '@angular/forms';
 
@@ -14,6 +21,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
 
 
 @NgModule({
@@ -25,7 +33,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroSearchComponent
   ],
   /**
    * Este array contiene los módulos externos
@@ -37,7 +46,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+
+    /**
+     * • HttpClientInMemoryWebApiModule -> interceptara las peticiones 
+     * http y simulara las respuestas del servidor.
+     * 
+     * • Se removera cuando un servidor real este listo para recibir peticiones.
+     */
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent]

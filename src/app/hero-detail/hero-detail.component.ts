@@ -17,7 +17,8 @@ import { HeroService } from '../hero.service';
 
 export class HeroDetailComponent implements OnInit {
   // Se debe declarar la propiedad hero precedido por
-  // el decorador @Input()
+  // el decorador @Input(), estable el campo como uno de entrada
+  // conecta el DOM con este.
   @Input() hero?: Hero;
 
   /**
@@ -52,8 +53,17 @@ export class HeroDetailComponent implements OnInit {
       subscribe(hero => this.hero = hero);
   }
 
-  goBack(): void
+  goBack(): void  
   {
     this.location.back();
+  }
+
+  save(): void  
+  {
+    if (this.hero)
+    {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
   }
 }

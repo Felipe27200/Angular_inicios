@@ -1,29 +1,27 @@
 
-    <span>{{ title }} app is running!</span>
+<h1> {{ title }} </h1>
+<!-- 
+    Así se renderiza el componente
+    Sintaxis: nombre de la carpeta "-" y nombre del
+    componente, dado por el selector
+-->
+
+<nav>
     <!-- 
-        Así se renderiza el componente
-        Sintaxis: nombre de la carpeta "-" y nombre del
-        componente, dado por el selector
+        El atributo routerLink se establece con "/heroes",
+        la cadena que el enrutador coincide con la ruta de
+        HeroesComponent.
     -->
+    <a routerLink="/dashboard">Dashboard</a>
 
-    <nav>
-        <!-- 
-            El atributo routerLink se establece con "/heroes",
-            la cadena que el enrutador coincide con la ruta de
-            HeroesComponent.
-        -->
-        <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/heroes">Heroes</a>
+</nav>
 
-        <a routerLink="/heroes">Heroes</a>
-    </nav>
+<!-- <app-heroes></app-heroes> // Será reemplazado por el enrutador -->
+<!-- 
+    Esta etiqueta le indica al enrutador en donde
+    debe mostrar las vistas de las rutas.
+-->
+<router-outlet></router-outlet>
 
-    <!-- <app-heroes></app-heroes> // Será reemplazado por el enrutador -->
-    <!-- 
-        Esta etiqueta le indica al enrutador en donde
-        debe mostrar las vistas de las rutas.
-    -->
-    <router-outlet></router-outlet>
-
-    <app-messages></app-messages>
-
-    
+<app-messages></app-messages>
