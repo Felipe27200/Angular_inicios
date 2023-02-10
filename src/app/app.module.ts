@@ -7,10 +7,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
+
 // Se importa el módulo de formularios de angular.
 import { FormsModule } from '@angular/forms';
 
+/**
+ * This have a critical metadata for all project.
+ */
 @NgModule({
+  /**
+   * Aquí se edebeb declarar los componentes, directive y pipes
+   * que pertenecen a toda la aplicación y que estarán disponibles
+   * para la misma.
+   */
   declarations: [
     AppComponent,
     HeroesComponent
