@@ -12,12 +12,15 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
-
+/**
+ * This have a critical metadata for all project.
+ */
 @NgModule({
   /**
-   * Son los componentes que se usarán en la aplicación
-   */
-  declarations: [
+   * Aquí se deben declarar los componentes, directive y pipes
+   * que pertenecen a toda la aplicación y que estarán disponibles
+   * para la misma.
+   */  declarations: [
     AppComponent,
     HeroesComponent,
     HeroDetailComponent

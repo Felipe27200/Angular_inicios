@@ -1,3 +1,6 @@
+/**
+ * Always import the Component Symbol  
+ **/
 import { Component, OnInit } from '@angular/core';
 
 // Importar la interfaz
@@ -5,17 +8,25 @@ import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
 
 @Component({
+  // The identifier for the component, based on CSS selectors.
   selector: 'app-heroes',
+  // Location of the component's template file
   templateUrl: './heroes.component.html',
-
   /**
-   * Por la nomenclatura, se indica que la hoja 
-   * de estilos pertenece a este documento en específico,
+   * Por la nomenclatura, se indica que la hoja de 
+   * estilos pertenece a este documento en específico,
    * por ende, no podrá ser aplicado en ningún otro.
-   */
+   * 
+   * Se sobrepone a los estilos del padre o globales.
+   */  
   styleUrls: ['./heroes.component.css']
 })
 
+/**
+ * The annotation @Component is a decorator
+ * function that specifies the Angular metadata
+ * for the component.
+ */
 export class HeroesComponent implements OnInit {
 
   /**
@@ -23,30 +34,22 @@ export class HeroesComponent implements OnInit {
    * del componente para hacer accesibles los 
    * heroes del módulo importado mock-heroes.
    * 
-   * Se le asigna la variable correspondiente,
+   * Se le asigna a la variable correspondiente,
    * que almacena los datos del módulo importado.
    */
   heroes = HEROES;
 
   /**
-   * Se refactorizará para usar la interfaz y así
-   * definir la forma del heroe
-   * hero = "Windstorm";
-   */
-  hero: Hero = {
-    id: 1,
-    name: "Windstorm"
-  };
-
-  // Aquí se crea la VI indicando que puede ser 
-  // undefined, gracias al "?"
+   * Aquí se crea la VI indicando que 
+   * puede ser undefined, gracias al "?"
+   */  
   selectedHero?: Hero;
 
   constructor() { 
 
   }
 
-  // método de la clase: parámetro Hero y retorno void
+  // Método de la clase -> parámetro Hero y retorno void
   onSelect(hero: Hero): void
   {
     this.selectedHero = hero;
