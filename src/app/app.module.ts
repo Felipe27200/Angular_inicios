@@ -11,10 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 
-
+/**
+ * This have a critical metadata for all project.
+ */
 @NgModule({
   /**
-   * Son los componentes que se usarán en la aplicación
+   * Aquí se edebeb declarar los componentes, directive y pipes
+   * que pertenecen a toda la aplicación y que estarán disponibles
+   * para la misma.
    */
   declarations: [
     AppComponent,
