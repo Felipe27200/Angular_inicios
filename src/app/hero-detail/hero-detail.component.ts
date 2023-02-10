@@ -1,4 +1,4 @@
-// Se debe importar el Input para poder ser usada
+// Se debe importar el Input Symbol para poder usarlo.
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Hero } from '../hero';
@@ -10,8 +10,17 @@ import { Hero } from '../hero';
 })
 
 export class HeroDetailComponent implements OnInit {
-  // Se debe declarar la propiedad hero precedido por
-  // el decorador @Input()
+  /**
+   * Binding data from the parent to child
+   * 
+   * @Input () -> le permite al componente padre 
+   * modificar datos en el componente hijo. 
+   */
+
+  /**
+   * Para esto, la propiedad debe ser Input property,
+   * anotada con el @Input() decorator.
+   */
   @Input() hero?: Hero;
 
   constructor() { }
