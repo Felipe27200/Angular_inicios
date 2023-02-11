@@ -1,53 +1,53 @@
-<!-- 
-    >>> De esta forma sólo se mostrará que es un Object <<<
-    <h2>{{ hero }}</h2> 
--->
-
-<!-- Presentación adecuada de los datos del heroe -->
-
-<!-- 
-    <div>name: <span>{{ hero.name }}</span></div> 
--->
-
-<!-- Mostrar y Editar la información del Héroe -->
-<!-- Dar formato al string -->
-<!-- <h2>{{ hero.name | uppercase }} Details </h2>
-<div>id: <span>{{ hero.id }}</span></div>
-
-<div>
-    <label for="name">Hero name: </label> -->
-    <!-- 
-        [(ngModel)]: es una sintaxis de angular que vincula
-        en dos flujos los datos.
-    
-        Los datos pueden viajar de hero.name al textbox y del 
-        textbox de nuevo a hero.name.
-
-        Aunque es una directiva válida angular llamarla directamente
-        sobre el textbox generará un error, ya que pertenece al 
-        módulo opcional de FormsModule y debe optar por usarloj.
-
-     <input id="name" [(ngModel)]="hero.name" placeholder="name">
-</div> -->
-
-<!-- >>>>> ITERAR A TRAVÉS DE UN ARRAY-OBJETO-LISTA -->
-
-<!-- Para esto se usa la directiva structal *ngFor, la cual 
-    itera a través de los items de una colección, la directiva
-    es ubicada en un elemento, que se convertirá en el padre
-    de los templates clonados -->
-
 <h2>My Heroes</h2>
 
+<!-- 
+    +----------------------------------------+
+    | ITERAR A TRAVÉS DE: ARRAY-OBJETO-LISTA |
+    +----------------------------------------+
+-->
+
+<!-- 
+    Para esto se usa la directiva estructural *ngFor, 
+    la cual itera a través de los items de una colección.
+    
+    La directiva es ubicada en un elemento, que se 
+    convertirá en el padre de los templates clonados.
+-->
+
 <ul class="heroes">
+    <!--  
+        Repite el elemento anfitrión - host 
+        para cada elemento en una lista.
+        
+        heroes hace referencia a la propiedad en 
+        la clase del componente.
+    -->
     <li *ngFor="let hero of heroes"> <!-- Este sería el elemento anfitrión u host -->
 
-        <!-- Listen events: los paréntesis le indican a angular que escuche el evento -->
         <!-- 
-            [class.selected]="expresion" cuando la expresión resulta true se aplica el estilo
-            cuando la expresión es false este se remueve.
+            +------------------+
+            | LISTEN TO EVENTS | 
+            +------------------+
+            
+            (event) -> Los paréntesis le indican a Angular
+            que escuche ese evento específico en el elemento. 
+            
+            Cuando el usuario pulsa el elemento se ejecuta la
+            expresión onSelect(hero).
+        -->
+        <!-- 
+            +---------------+
+            | Class Binding |
+            +---------------+
 
-            Se aplica la clase "selected" de estilos.
+            Permite añadir o remover una clase según una condición:
+                [class.some-css-class]="some-condition"
+
+            [class.selected]="expresion" cuando la expresión resulta 
+            true se aplica el estilo, de lo contrario, se remueve.
+
+            Se aplica la clase "selected" de estilos, cuando el hero
+            actual es el mismo que selectedHero.
         -->
         <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
             <span class="badge">{{ hero.id }}</span> 
@@ -56,14 +56,11 @@
     </li>
 </ul>
 
-<!-- La propiedad hero de hero-detail debe ser una Input propiedad,
-    ya que el componente heroes lo vincula de esta forma. -->
-
-<!-- [hero]="selectedHero", es una propiedad de vinculación de angular -->
-
 <!-- 
-    Es una propiedad de un flujo unidireccional, ya que va desde la propiedad
-    selectedHero del componente HeroesComponent hasta la propiedad hero de
-    HeroDetailComponent
- -->
+    [hero]="selectedHero", es una propiedad de vinculación de Angular.
+    
+    Es una propiedad de un flujo unidireccional, 
+    ya que va desde la propiedad selectedHero del componente HeroesComponent 
+    hasta la propiedad hero de HeroDetailComponent.    
+-->
 <app-hero-detail [hero]="selectedHero" ></app-hero-detail>

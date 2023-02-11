@@ -9,10 +9,16 @@ import { MessageService } from '../message.service';
 })
 export class MessagesComponent implements OnInit {
 
-  // Debe ser público porque este será vinculado en el template.
+  /**
+   * 
+   * @param messageService al ser Singleton HeroService
+   * y este componente hacen referencia al mismo objeto.
+   * 
+   * Debe ser público porque este será vinculado en el template.
+   * 
+   * Angular solo vincula las propiedas publicas del componente.
+   */
   constructor(public messageService: MessageService) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }
