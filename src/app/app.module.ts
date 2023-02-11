@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
-// Se importa el módulo de formularios de angular.
+// Se importa el módulo de formularios de Angular.
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -21,12 +21,15 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
 
-
+/**
+ * This have a critical metadata for all project.
+ */
 @NgModule({
   /**
-   * Son los componentes que se usarán en la aplicación
+   * Aquí se deben declarar los componentes, directive y pipes
+   * que pertenecen a toda la aplicación y que estarán disponibles
+   * para la misma.
    */
   declarations: [
     AppComponent,
@@ -34,14 +37,13 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    HeroSearchComponent
   ],
   /**
    * Este array contiene los módulos externos
    * que la aplicación necesita.
    * 
-   * Con esto los módulos importados ya podrán ser
-   * usados.
+   * Con esto los módulos importados 
+   * ya podrán ser usados.
    */
   imports: [
     BrowserModule,

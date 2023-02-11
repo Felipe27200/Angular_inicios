@@ -1,180 +1,90 @@
+// Import the Angular Injectable Symbol
 import { Injectable } from '@angular/core';
 
 /**
- * Importando una clase para poder obtener
- * datos de forma asincrona.
+ * Importar dependencias para poder
+ * obtener datos de forma asíncrona.
  */
 import { Observable, of } from 'rxjs';
 
-// Importando dependencias al servicio
+/**
+ * IMPORT DEPENDENCIES INSIDE THE SERVICE
+ */
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
 
 // Importar servicios
 import { MessageService } from './message.service';
 
-// Importar dependencias HTTP
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { catchError, map, tap } from "rxjs/operators";
-
-// Le indica a Angular que puede usar esta
-// clase en el DI system
+/**
+ * Marca la clase como una que participa
+ * en el Dependency Injection System.
+ * 
+ * Por ende, la clase HeroService va a 
+ * proveer un servicio inyectable, también
+ * podrá tener sus propias dependencias.
+ * 
+ * * También acepta metadatos entre sus
+ * * paréntesis
+ * 
+ */
 @Injectable({
   /**
-   * Este campo indica que el servicio
-   * será inyecado a root level.
+   * Para poder hacer uso de un servicio y
+   * hacerlo disponible para el Dependecy 
+   * Injection, se debe registrar un provider.
+   * 
+   * Es algo que puede crear o repartir un servicio,
+   * en este caso, instancia HeroService para poder
+   * proveerlo.
+   * 
+   * Para estar seguro que HeroService puede proveer
+   * el servicio, registrelo con el inyector, el cuál
+   * es el objeto que elige e inyecta el provider
+   * donde la aplicación lo requiere.
+   * 
+   * Esto indica que se inyecto a nivel raíz, por lo que
+   * es accesible para todos.
    */
   providedIn: 'root'
 })
 
 export class HeroService {
   /**
-   * Definir un encabezado para la petición Update
-   */
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
-  /**
-   * Tiene una sintaxis de :base/:collectionName
+   * Inyecta MessageService (Singleton) cuando se crea HeroService.
    * 
-   * La base es el recurso al que se realizan las peticiones HTTP.
-   * :collectionName son los datos del objeto heroes, proveniente
-   * de in-memory-data-service.ts
+   * Escenario conocido como: Service-in-Service
    */
-  private heroesUrl = 'api/heroes';
-
-  // Usar el servicio importado
-  // Escenario conocido como: Service-in-Service
-  constructor(private messageService: MessageService,
-      private http: HttpClient) { }
-
-  /**
-   * Función que retorna los héroes ->
-   * su tipo de retorno es un array de 
-   * Hero debido a que HEROES es un 
-   * array de Hero. 
-   */  
-  // getHeroes(): Hero[] 
-  // {
-  //   return HEROES;
-  // }
-
-  getHeroes(): Observable<Hero[]>
-  {
-    /**
-     * of() Retorna un Observable<Hero[]>, que emite un
-     * único valor, el array del mock heroes.
-     */
-    // const heroes = of(HEROES);
-    // return heroes;
-
-    /**
-     * Se envía un mensaje cuando los heroes son buscados/recuperados.
-       this.messageService.add("Hero Service: fetched heroes");
-     */
-
-    // Se intercambia el método of(), pero ambos retornan un Observable
-    // return this.http.get<Hero[]>(this.heroesUrl);
-
-    // <<< MANEJAR LOS ERRORES >>>
-    return this.http.get<Hero[]>(this.heroesUrl)
-        .pipe(
-          /**
-           * tap() no accede a los datos como tal, pero permite llamar
-           * al método log() para enviar mesajes, ya que mira 
-           * los Observables y sus valores, haciendo algo 
-           * con ellos y pasándolos.
-           */
-          tap(_ => this.log('fetched heroes')),
-          catchError(this.handleError<Hero[]>('getHeroes', []))
-        );
-  }
+  constructor(private messageService: MessageService) { }
 
   getHero(id: number): Observable<Hero>
   {
-    // const hero = HEROES.find(h => h.id === id)!;
+    const hero = HEROES.find(h => h.id === id)!;
 
-    // this.messageService.add(`HeroService: fetched hero id = ${id}`);
+    this.messageService.add(`HeroService: fetched hero id = ${id}`);
 
-    // return of(hero);
-
-    /**
-     * La :base es la url almacenada en heroesUrl, la cual
-     * será el recurso al que se le harán las peticiones.
-     * Después de / va el id a enviar.
-     */
-    const url = `${this.heroesUrl}/${id}`
-
-    return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Hero>(`getHero id=${id}`))
-    );
+    return of(hero);
   }
 
-  // Como la funcionalidad de mensajes se usa frecuentemente se 
-  // usa un método log()
-  private log(message: string)
-  {
-    this.messageService.add(`Hero Service: ${message}`);
-  }
-
-  private handleError<T>(operation = 'operation', result?: T)
-  {
-    return (error: any): Observable<T> => {
-      console.error(error);
-
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Permite a la app continuar, enviando un resultado vacío.
-      return of(result as T);
-    }
-  }
-
-  updateHero(hero: Hero): Observable<any>
-  {
-    return this.http.put(this.heroesUrl, hero, this.httpOptions)
-        .pipe(
-          tap(_ => this.log(`updated hero id=${hero.id}`)),
-          catchError(this.handleError<any>('updateHero'))
-        );
-  }
-
-  addHero(hero: Hero): Observable<Hero>
+  /**
+   * El método se ha adaptado para 
+   * retornar el Observable Hero
+   */
+  getHeroes(): Observable<Hero[]>
   {
     /**
-     * Espera que el servidor cree un id para para el nuevo, que retorna
-     * en el Observable<Hero> para quién realizo la llamada.
+     * of(HEROES):
+     * 
+     * Retorna un Observable<Hero[]>, que emite un
+     * único valor, el array del mock heroes.
      */
-    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Hero>('addHero'))
-    );
-  }
+    const heroes = of(HEROES);
 
-  deleteHero(id: number): Observable<Hero>
-  {
-    const url = `${this.heroesUrl}/${id}`;
+    /**
+     * Se envía un mensaje cuando los heroes son buscados/recuperados.
+     */
+    this.messageService.add("Hero Service: fetched heroes");
 
-    return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
-      catchError(this.handleError<Hero>('deleteHero'))
-    );
-  }
-
-  searchHeroes(term: string): Observable<Hero[]>
-  {
-    if (!term.trim())
-    {
-      return of([]);
-    }
-
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-      tap(x => x.length ? 
-        this.log(`found heroes matching "${term}"`) :
-        this.log(`no heroes matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
-    );
+    return heroes;
   }
 }

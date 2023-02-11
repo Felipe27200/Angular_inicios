@@ -1,9 +1,10 @@
-
 <!-- 
-    SECCIÓN PARA MOSTRAR LA INFO. DE UN
-        HÉROE QUE HA SIDO SELECCIONADO
-
-    *ngIf le indica a angular que muestra esta
+    +-------------------------+
+    | DISPLAY HERO's DATA |
+    +-------------------------+
+-->
+<!-- 
+    *ngIf le indica a Angular que muestre esta
     sección sólo cuando el héroe ha sido seleccionado.
 -->
 
@@ -20,11 +21,10 @@
 
 <!-- 
     Existe una relación de padre - hijo
-    entre este componente y heroes, siendo heroes el padre
-    ya que éste controla al hijo enviandole datos. 
+    entre este componente y HeroesComponent, 
+    siendo HeroesComponent el padre, ya que 
+    éste controla al hijo enviandole datos. 
 -->
 
 <!-- Retornar a la vista anterior -->
 <button type="button" (click)="goBack()">Go Back</button>
-
-<button type="button" (click)="save()"> Save </button>

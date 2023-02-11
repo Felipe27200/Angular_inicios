@@ -31,6 +31,7 @@ a {
   min-width: 70px;
   margin: .5rem auto;
   box-sizing: border-box;
+  margin-right: 10px;
 
   /* flexbox */
   order: 0;
@@ -48,3 +49,10 @@ a {
 a:hover {
   background-color: #000;
 }
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/
