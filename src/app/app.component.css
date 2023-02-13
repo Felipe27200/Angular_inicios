@@ -7,7 +7,6 @@ nav a {
   padding: 1rem;
   text-decoration: none;
   margin-top: 10px;
-  margin-right: 10px;
   display: inline-block;
   background-color: #e8e8e8;
   color: #3d3d3d;
@@ -19,6 +18,13 @@ nav a:hover {
   background-color: #42545C;
 }
 
-nav a:active {
+nav a.active {
   background-color: black;
 }
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/

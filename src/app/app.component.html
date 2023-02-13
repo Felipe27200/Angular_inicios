@@ -1,27 +1,44 @@
-
-<h1> {{ title }} </h1>
 <!-- 
-    Así se renderiza el componente
-    Sintaxis: nombre de la carpeta "-" y nombre del
-    componente, dado por el selector
+    {{ }} -> Es la interpolación de Angular que 
+    muestra los datos del componte en el template
+    correspondiente.
 -->
+<h1> {{ title }} </h1>
 
 <nav>
-    <!-- 
-        El atributo routerLink se establece con "/heroes",
-        la cadena que el enrutador coincide con la ruta de
-        HeroesComponent.
-    -->
     <a routerLink="/dashboard">Dashboard</a>
 
+    <!--
+        +-----------------+
+        | NAVIGATION LINK |
+        +-----------------+
+
+        El atributo routerLink se establece con 
+        "/heroes", la cadena que el ROUTER hace 
+        coincide con la ruta de HeroesComponent.
+
+        La directiva RouterLink permite que los
+        eventos click del usuario se tornen en
+        router navigations (belongs to RouterModule).
+    -->
     <a routerLink="/heroes">Heroes</a>
 </nav>
 
-<!-- <app-heroes></app-heroes> // Será reemplazado por el enrutador -->
 <!-- 
-    Esta etiqueta le indica al enrutador en donde
-    debe mostrar las vistas de las rutas.
+    +---------------+
+    | ROUTING VIEWS |
+    +---------------+
+
+    Esta etiqueta le indica al router en 
+    donde mostrar las vistas de las rutas.
+
+    Esta es una de muchas directivas que 
+    trae RouterModule.
 -->
 <router-outlet></router-outlet>
 
+<!-- 
+    Se usa el Identifcador del componente para
+    cargarlo a él, su template y estilos.
+-->
 <app-messages></app-messages>

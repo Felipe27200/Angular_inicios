@@ -16,8 +16,18 @@ import { HeroService } from '../hero.service';
 })
 
 export class HeroSearchComponent implements OnInit {
+  /**
+   * $ -> define la VI como un Observable.
+   */
   heroes$!: Observable<Hero[]>;
 
+  /**
+   * Un Subject esta una fuenta de valores observables
+   * como un Observable, en sí mismo.
+   * 
+   * Puedes suscribirte a un Subject como a cualquier
+   * otro Observable.
+   */
   private searchTerms = new Subject<string>();
 
   constructor(private heroService: HeroService) {}
@@ -32,7 +42,7 @@ export class HeroSearchComponent implements OnInit {
       distinctUntilChanged(),
 
       /**
-       * Cambia al nuevo obsevable buscado, cada vez que el term cambia.
+       * Cambia al nuevo Observable buscado cada vez que el term cambia.
        */
       switchMap((term: string) => this.heroService.searchHeroes(term))
     );
@@ -41,6 +51,10 @@ export class HeroSearchComponent implements OnInit {
   // Pone la busqueda del term dentro del flujo del observable.
   search (term: string): void
   {
+    /**
+     * El método next(value): permite insertar 
+     * valores en un Observable.
+     */
     this.searchTerms.next(term);
   }
 }

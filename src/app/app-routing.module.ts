@@ -17,16 +17,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 /**
- * - path es un string que corresponde a la ruta.
- * - component corresponde al componente que el navegador 
- *     debería crear cuando se navega a través de estas rutas.
+ * - path -> es un string que corresponde a la ruta.
+ * 
+ * - component -> corresponde al componente que el router 
+ *   debería crear cuando se navega hacia esa rutas.
  */
 const routes: Routes = [
-  /*
-    Así se logra crear una ruta predefinida que permite
-    redireccionar y mostrar el dashboard siempre que la app
-    se abra por primera vez o se recargue.
-  */
+  /**
+   * Así se logra crear una ruta predefinida que permite
+   * redireccionar y mostrar el dashboard siempre que la ruta
+   * en el navegado esté vacía.
+   */
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
 
   {path: 'heroes', component: HeroesComponent},
@@ -34,12 +35,16 @@ const routes: Routes = [
 
   /**
    * Con esta ruta se le podrá enviar datos al componente.
-   * 
    * Los dos puntos indican que id almacena un valor.
    */
   {path: 'detail/:id', component: HeroDetailComponent},
 ];
 
+/**
+ * Los @Ngmodule metadatos inicializan el router
+ * y empiezan a eschuchar los cambios de locación
+ * en el navegador.
+ */
 @NgModule({
   /**
    * Se añade el RouterModule con el método
